@@ -13,7 +13,7 @@ const App = () => {
     <div className="gameBoard">
       {board.map((row, rowIndex) => {
         return (
-          <div className="gameRow" key={`row-${rowIndex}`}>
+          <div className="gameRow" key={rowIndex}>
             {row.map((digit, columnIndex) => (
               <Block key={columnIndex} digit={digit} />
             ))}
