@@ -11,10 +11,13 @@ const App = () => {
 		[0, 0, 0, 0],
 	]);
 
-	const swipeUp = () => {
-		let newGrid = cloneDeep(board);
+	const swipeRight = () => {
+    let newGrid = cloneDeep(board);
 
+    setBoard(newGrid);
+		initialize();
 	};
+
 
 	const handleKeyDown = (event) => {
 		if (event.code === 'ArrowUp') {
@@ -24,7 +27,7 @@ const App = () => {
 			console.log(event.code);
 		}
 		if (event.code === 'ArrowRight') {
-			console.log(event.code);
+			swipeRight();
 		}
 		if (event.code === 'ArrowDown') {
 			console.log(event.code);
@@ -43,7 +46,7 @@ const App = () => {
 		let randomNumber2 = Math.floor(Math.random() * 4);
 
 		if (newGrid[randomNumber1][randomNumber2] === 0) {
-			newGrid[randomNumber1][randomNumber2] = Math.random() > 0.5 ? 2 : 4;
+			newGrid[randomNumber1][randomNumber2] = Math.random() > 0.1 ? 2 : 4;
 		}
 	};
 
