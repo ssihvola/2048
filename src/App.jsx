@@ -11,6 +11,21 @@ const App = () => {
 		[0, 0, 0, 0],
 	]);
 
+	const handleKeyDown = (event) => {
+		if (event.code === 'ArrowUp') {
+			console.log(event.code)
+		}
+		if (event.code === 'ArrowLeft') {
+			console.log(event.code)
+		}
+		if (event.code === 'ArrowRight') {
+			console.log(event.code)
+		}
+		if (event.code === 'ArrowDown') {
+			console.log(event.code)
+		}
+	}
+
 	const initialize = () => {
 		let newGrid = cloneDeep(board);
 		addNumber(newGrid);
@@ -19,26 +34,17 @@ const App = () => {
 	};
 
 	const addNumber = (newGrid) => {
-		let gridFull = false;
-		let added = false;
+		let randomNumber1 = Math.floor(Math.random() * 4);
+		let randomNumber2 = Math.floor(Math.random() * 4);
 
-		while (!added) {
-			if (gridFull) {
-				break;
-			}
-
-			let randomNumber1 = Math.floor(Math.random() * 4);
-			let randomNumber2 = Math.floor(Math.random() * 4);
-
-			if (newGrid[randomNumber1][randomNumber2] === 0) {
-				newGrid[randomNumber1][randomNumber2] = Math.random() > 0.5 ? 2 : 4;
-				added = true;
-			}
+		if (newGrid[randomNumber1][randomNumber2] === 0) {
+			newGrid[randomNumber1][randomNumber2] = Math.random() > 0.5 ? 2 : 4;
 		}
 	};
 
 	useEffect(() => {
 		initialize();
+		document.addEventListener('keydown', handleKeyDown)
 	}, []);
 
 	return (
