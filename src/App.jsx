@@ -11,20 +11,25 @@ const App = () => {
 		[0, 0, 0, 0],
 	]);
 
+	const swipeUp = () => {
+		let newGrid = cloneDeep(board);
+
+	};
+
 	const handleKeyDown = (event) => {
 		if (event.code === 'ArrowUp') {
-			console.log(event.code)
+			console.log(event.code);
 		}
 		if (event.code === 'ArrowLeft') {
-			console.log(event.code)
+			console.log(event.code);
 		}
 		if (event.code === 'ArrowRight') {
-			console.log(event.code)
+			console.log(event.code);
 		}
 		if (event.code === 'ArrowDown') {
-			console.log(event.code)
+			console.log(event.code);
 		}
-	}
+	};
 
 	const initialize = () => {
 		let newGrid = cloneDeep(board);
@@ -44,7 +49,7 @@ const App = () => {
 
 	useEffect(() => {
 		initialize();
-		document.addEventListener('keydown', handleKeyDown)
+		document.addEventListener('keydown', handleKeyDown);
 	}, []);
 
 	return (
@@ -53,7 +58,7 @@ const App = () => {
 				return (
 					<div className="gameRow" key={rowIndex}>
 						{row.map((digit, columnIndex) => (
-							<Block key={columnIndex} digit={digit} />
+							<Block key={columnIndex} digit={digit === 0 ? null : digit} />
 						))}
 					</div>
 				);
