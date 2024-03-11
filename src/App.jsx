@@ -67,9 +67,62 @@ const App = () => {
 		});
 	};
 
+	const swipeUp = () => {
+		setBoard((prevBoard) => {
+			let newGrid = cloneDeep(prevBoard);
+	
+			for (let j = 0; j < newGrid[0].length; j++) {
+				for (let i = 0; i < newGrid.length; i++) {
+					if (newGrid[i][j] !== 0) {
+						let k = i;
+						while (k - 1 >= 0 && newGrid[k - 1][j] === 0) {
+							newGrid[k - 1][j] = newGrid[k][j];
+							newGrid[k][j] = 0;
+							k--;
+						}
+						if (k - 1 >= 0 && newGrid[k - 1][j] === newGrid[k][j]) {
+							// If two adjacent digits are equal, merge them
+							newGrid[k - 1][j] *= 2;
+							newGrid[k][j] = 0;
+						}
+					}
+				}
+			}
+	
+			return newGrid;
+		});
+	};
+	
+	const swipeDown = () => {
+		setBoard((prevBoard) => {
+			let newGrid = cloneDeep(prevBoard);
+	
+			for (let j = 0; j < newGrid[0].length; j++) {
+				for (let i = newGrid.length - 1; i >= 0; i--) {
+					if (newGrid[i][j] !== 0) {
+						let k = i;
+						while (k + 1 < newGrid.length && newGrid[k + 1][j] === 0) {
+							newGrid[k + 1][j] = newGrid[k][j];
+							newGrid[k][j] = 0;
+							k++;
+						}
+						if (k + 1 < newGrid.length && newGrid[k + 1][j] === newGrid[k][j]) {
+							// If two adjacent digits are equal, merge them
+							newGrid[k + 1][j] *= 2;
+							newGrid[k][j] = 0;
+						}
+					}
+				}
+			}
+	
+			return newGrid;
+		});
+	};
+	
+
 	const handleKeyDown = (event) => {
 		if (event.code === 'ArrowUp') {
-			console.log(event.code);
+			swipeUp();
 		}
 		if (event.code === 'ArrowLeft') {
 			swipeLeft();
@@ -78,7 +131,7 @@ const App = () => {
 			swipeRight();
 		}
 		if (event.code === 'ArrowDown') {
-			console.log(event.code);
+			swipeDown();
 		}
 	};
 
@@ -96,6 +149,9 @@ const App = () => {
 		if (newGrid[randomNumber1][randomNumber2] === 0) {
 			newGrid[randomNumber1][randomNumber2] = Math.random() > 0.1 ? 2 : 4;
 		}
+
+		//should also add numbers when the grid is full'ish
+		//maybe need another loop or something
 	};
 
 	useEffect(() => {
