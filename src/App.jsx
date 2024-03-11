@@ -12,19 +12,67 @@ const App = () => {
 	]);
 
 	const swipeRight = () => {
-    let newGrid = cloneDeep(board);
+		setBoard((board) => {
+			let newGrid = cloneDeep(board);
 
-    setBoard(newGrid);
-		initialize();
+			for (let i = 0; i < newGrid.length; i++) {
+				for (let j = newGrid[i].length - 1; j >= 0; j--) {
+					if (newGrid[i][j] !== 0) {
+						let k = j;
+						while (k + 1 < newGrid[i].length && newGrid[i][k + 1] === 0) {
+							newGrid[i][k + 1] = newGrid[i][k];
+							newGrid[i][k] = 0;
+							k++;
+						}
+						if (
+							k + 1 < newGrid[i].length &&
+							newGrid[i][k + 1] === newGrid[i][k]
+						) {
+							newGrid[i][k + 1] *= 2;
+							newGrid[i][k] = 0;
+						}
+					}
+				}
+			}
+			addNumber(newGrid);
+			return newGrid;
+		});
 	};
 
+	const swipeLeft = () => {
+		setBoard((board) => {
+			let newGrid = cloneDeep(board);
+
+			for (let i = 0; i < newGrid.length; i++) {
+				for (let j = 0; j < newGrid[i].length; j++) {
+					if (newGrid[i][j] !== 0) {
+						let k = j;
+						while (k - 1 >= 0 && newGrid[i][k - 1] === 0) {
+							newGrid[i][k - 1] = newGrid[i][k];
+							newGrid[i][k] = 0;
+							k--;
+						}
+						if (
+							k - 1 < newGrid[i].length &&
+							newGrid[i][k - 1] === newGrid[i][k]
+						) {
+							newGrid[i][k - 1] *= 2;
+							newGrid[i][k] = 0;
+						}
+					}
+				}
+			}
+			addNumber(newGrid);
+			return newGrid;
+		});
+	};
 
 	const handleKeyDown = (event) => {
 		if (event.code === 'ArrowUp') {
 			console.log(event.code);
 		}
 		if (event.code === 'ArrowLeft') {
-			console.log(event.code);
+			swipeLeft();
 		}
 		if (event.code === 'ArrowRight') {
 			swipeRight();
