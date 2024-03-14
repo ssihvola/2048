@@ -4,7 +4,7 @@ import Block from './components/Block';
 import './index.css';
 
 const App = () => {
-	const [board, setBoard] = useState([
+	const [gameGrid, setGameGrid] = useState([
 		[0, 0, 0, 0],
 		[0, 0, 0, 0],
 		[0, 0, 0, 0],
@@ -12,8 +12,8 @@ const App = () => {
 	]);
 
 	const swipeRight = () => {
-		setBoard((board) => {
-			let newGrid = cloneDeep(board);
+		setGameGrid((gameGrid) => {
+			let newGrid = cloneDeep(gameGrid);
 
 			for (let i = 0; i < newGrid.length; i++) {
 				for (let j = newGrid[i].length - 1; j >= 0; j--) {
@@ -34,14 +34,16 @@ const App = () => {
 					}
 				}
 			}
-			addNumber(newGrid);
+			if (JSON.stringify(gameGrid) !== JSON.stringify(newGrid)) {
+				addNumber(newGrid);
+			}
 			return newGrid;
 		});
 	};
 
 	const swipeLeft = () => {
-		setBoard((board) => {
-			let newGrid = cloneDeep(board);
+		setGameGrid((gameGrid) => {
+			let newGrid = cloneDeep(gameGrid);
 
 			for (let i = 0; i < newGrid.length; i++) {
 				for (let j = 0; j < newGrid[i].length; j++) {
@@ -62,15 +64,17 @@ const App = () => {
 					}
 				}
 			}
-			addNumber(newGrid);
+			if (JSON.stringify(gameGrid) !== JSON.stringify(newGrid)) {
+				addNumber(newGrid);
+			}
 			return newGrid;
 		});
 	};
 
 	const swipeUp = () => {
-		setBoard((prevBoard) => {
-			let newGrid = cloneDeep(prevBoard);
-	
+		setGameGrid((gameGrid) => {
+			let newGrid = cloneDeep(gameGrid);
+
 			for (let j = 0; j < newGrid[0].length; j++) {
 				for (let i = 0; i < newGrid.length; i++) {
 					if (newGrid[i][j] !== 0) {
@@ -81,22 +85,23 @@ const App = () => {
 							k--;
 						}
 						if (k - 1 >= 0 && newGrid[k - 1][j] === newGrid[k][j]) {
-							// If two adjacent digits are equal, merge them
 							newGrid[k - 1][j] *= 2;
 							newGrid[k][j] = 0;
 						}
 					}
 				}
 			}
-	
+			if (JSON.stringify(gameGrid) !== JSON.stringify(newGrid)) {
+				addNumber(newGrid);
+			}
 			return newGrid;
 		});
 	};
-	
+
 	const swipeDown = () => {
-		setBoard((prevBoard) => {
-			let newGrid = cloneDeep(prevBoard);
-	
+		setGameGrid((gameGrid) => {
+			let newGrid = cloneDeep(gameGrid);
+
 			for (let j = 0; j < newGrid[0].length; j++) {
 				for (let i = newGrid.length - 1; i >= 0; i--) {
 					if (newGrid[i][j] !== 0) {
@@ -107,18 +112,18 @@ const App = () => {
 							k++;
 						}
 						if (k + 1 < newGrid.length && newGrid[k + 1][j] === newGrid[k][j]) {
-							// If two adjacent digits are equal, merge them
 							newGrid[k + 1][j] *= 2;
 							newGrid[k][j] = 0;
 						}
 					}
 				}
 			}
-	
+			if (JSON.stringify(gameGrid) !== JSON.stringify(newGrid)) {
+				addNumber(newGrid);
+			}
 			return newGrid;
 		});
 	};
-	
 
 	const handleKeyDown = (event) => {
 		if (event.code === 'ArrowUp') {
@@ -136,22 +141,24 @@ const App = () => {
 	};
 
 	const initialize = () => {
-		let newGrid = cloneDeep(board);
+		let newGrid = cloneDeep(gameGrid);
 		addNumber(newGrid);
 		addNumber(newGrid);
-		setBoard(newGrid);
+		setGameGrid(newGrid);
 	};
 
 	const addNumber = (newGrid) => {
-		let randomNumber1 = Math.floor(Math.random() * 4);
-		let randomNumber2 = Math.floor(Math.random() * 4);
+		let added = false;
 
-		if (newGrid[randomNumber1][randomNumber2] === 0) {
-			newGrid[randomNumber1][randomNumber2] = Math.random() > 0.1 ? 2 : 4;
+		while (!added) {
+			let firstCoordinate = Math.floor(Math.random() * 4);
+			let secondCoordinate = Math.floor(Math.random() * 4);
+			if (newGrid[firstCoordinate][secondCoordinate] === 0) {
+				newGrid[firstCoordinate][secondCoordinate] =
+					Math.random() > 0.1 ? 2 : 4;
+				added = true;
+			}
 		}
-
-		//should also add numbers when the grid is full'ish
-		//maybe need another loop or something
 	};
 
 	useEffect(() => {
@@ -160,8 +167,8 @@ const App = () => {
 	}, []);
 
 	return (
-		<div className="gameBoard">
-			{board.map((row, rowIndex) => {
+		<div className="gameGrid">
+			{gameGrid.map((row, rowIndex) => {
 				return (
 					<div className="gameRow" key={rowIndex}>
 						{row.map((digit, columnIndex) => (
