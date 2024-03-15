@@ -1,5 +1,9 @@
 describe('2048 app', () => {
-  it('passes', () => {
-    cy.visit('http://localhost:5173')
+  beforeEach(() => {
+    cy.visit('')
+  })
+
+  it('can move to right', () => {
+    cy.realPress('ArrowRight')
   })
 })

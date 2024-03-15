@@ -12,6 +12,7 @@
   },
   "dependencies": {
     "@uidotdev/usehooks": "^2.4.1-experimental.1",
+    "cypress-real-events": "^1.12.0",
     "lodash.clonedeep": "^4.5.0",
     "react": "^0.0.0-experimental-0066e0b68-20240306",
     "react-dom": "^0.0.0-experimental-0066e0b68-20240306"
