@@ -4,17 +4,17 @@ This is my rendition of the game 2048, originally created by Gabrielle Cirulli i
 
 This project is solely for personal purposes, aimed at gaining more hands-on coding experience.
 
-# To do:
+# To do
 
 - Unit tests
 - Component tests
 - UI tests with Robot Framework
 
-# Bugs:
+# Bugs
 
 - Should calculate two numbers next to each other on one swipe, now calculates all the numbers on the row
 
-# Lacking features:
+# Lacking features
 
 - Animations
 - Point calculation system
