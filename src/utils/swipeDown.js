@@ -1,7 +1,8 @@
 import cloneDeep from "lodash.clonedeep";
 import addNumber from "./addNumber";
+import isGameOver from "./isGameOver";
 
-const swipeDown = ({ setGameGrid, isGameOver }) => {
+const swipeDown = ({ setGameGrid }) => {
   setGameGrid((gameGrid) => {
     let newGrid = cloneDeep(gameGrid);
 

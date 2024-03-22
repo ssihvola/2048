@@ -1,3 +1,20 @@
-# 2048 prototype
+# 2048 Clone
 
-Trying to figure out how to build a 2048 clone with React. 
+This is my rendition of the game 2048, originally created by Gabrielle Cirulli in 2014. I used to indulge in this game frequently in the past, but it slipped from my mind as time passed. However, in early 2024, a friend of mine mentioned the he was back playing the game, reigniting my interest and prompting me to play it once more. Upon revisiting the original source code on GitHub, I felt inspired to embark on building my own version. It seemed like a stimulating logic exercise.
+
+This project is solely for personal purposes, aimed at gaining more hands-on coding experience.
+
+# To do:
+
+- Unit tests
+- Component tests
+- UI tests with Robot Framework
+
+# Bugs:
+
+- Should calculate two numbers next to each other on one swipe, now calculates all the numbers on the row
+
+# Lacking features:
+
+- Animations
+- Point calculation system
