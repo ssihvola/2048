@@ -1,6 +1,7 @@
 import { useEffect, useState } from 'react';
 import cloneDeep from 'lodash.clonedeep';
 import Block from './components/Block';
+import swipeRight from './utils/swipeRight'
 import './index.css';
 
 const App = () => {
@@ -11,40 +12,6 @@ const App = () => {
 		[0, 0, 0, 0],
 	]);
 
-	const swipeRight = () => {
-		setGameGrid((gameGrid) => {
-			let newGrid = cloneDeep(gameGrid);
-
-			for (let i = 0; i < newGrid.length; i++) {
-				for (let j = newGrid[i].length - 1; j >= 0; j--) {
-					if (newGrid[i][j] !== 0) {
-						let k = j;
-						while (k + 1 < newGrid[i].length && newGrid[i][k + 1] === 0) {
-							newGrid[i][k + 1] = newGrid[i][k];
-							newGrid[i][k] = 0;
-							k++;
-						}
-						if (
-							k + 1 < newGrid[i].length &&
-							newGrid[i][k + 1] === newGrid[i][k]
-						) {
-							newGrid[i][k + 1] *= 2;
-							newGrid[i][k] = 0;
-						}
-					}
-				}
-			}
-			// Check if there was any movement in the grid
-			if (JSON.stringify(gameGrid) !== JSON.stringify(newGrid)) {
-				addNumber(newGrid);
-			}
-			if (isGameOver(newGrid)) {
-				alert('game over');
-			}
-
-			return newGrid;
-		});
-	};
 
 	const swipeLeft = () => {
 		setGameGrid((gameGrid) => {
@@ -153,7 +120,7 @@ const App = () => {
 			swipeLeft();
 		}
 		if (event.code === 'ArrowRight') {
-			swipeRight();
+			swipeRight({ setGameGrid, addNumber, isGameOver });
 		}
 		if (event.code === 'ArrowDown') {
 			swipeDown();
@@ -170,6 +137,7 @@ const App = () => {
 	const addNumber = (newGrid) => {
 		let added = false;
 
+		// Ensure that the number gets added
 		while (!added) {
 			let firstCoordinate = Math.floor(Math.random() * 4);
 			let secondCoordinate = Math.floor(Math.random() * 4);
