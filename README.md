@@ -6,6 +6,9 @@ This project is solely for personal purposes, aimed at gaining more hands-on cod
 
 # To do
 
+- Animations
+- Point calculation system
+- Clean board after game over
 - Unit tests
 - Component tests
 - UI tests with Robot Framework
@@ -13,8 +16,3 @@ This project is solely for personal purposes, aimed at gaining more hands-on cod
 # Bugs
 
 - Should calculate two numbers next to each other on one swipe, now calculates all the numbers on the row
-
-# Lacking features
-
-- Animations
-- Point calculation system
