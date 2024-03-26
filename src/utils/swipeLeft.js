@@ -6,21 +6,26 @@ const swipeLeft = ({ setGameGrid }) => {
   setGameGrid((gameGrid) => {
     let newGrid = cloneDeep(gameGrid);
 
-    for (let i = 0; i < newGrid.length; i++) {
-      for (let j = 0; j < newGrid[i].length; j++) {
-        if (newGrid[i][j] !== 0) {
-          let k = j;
-          while (k - 1 >= 0 && newGrid[i][k - 1] === 0) {
-            newGrid[i][k - 1] = newGrid[i][k];
-            newGrid[i][k] = 0;
-            k--;
+    // Iterate through each row of the grid
+    for (let row = 0; row < newGrid.length; row++) {
+      // Iterate through each column from left to right in the current row
+      for (let col = 0; col < newGrid[row].length; j++) {
+        // If the current cell is not empty (contains a number)
+        if (newGrid[row][col] !== 0) {
+          let currentCol = j;
+          // Move the current number to the left as far as possible
+          while (currentCol - 1 >= 0 && newGrid[row][currentCol - 1] === 0) {
+            newGrid[row][currentCol - 1] = newGrid[row][col];
+            newGrid[row][currentCol] = 0;
+            currentCol--;
           }
+          // If the next cell to the left has the same number, combine them
           if (
-            k - 1 < newGrid[i].length &&
-            newGrid[i][k - 1] === newGrid[i][k]
+            currentCol - 1 < newGrid[row].length &&
+            newGrid[row][currentCol - 1] === newGrid[row][currentCol]
           ) {
-            newGrid[i][k - 1] *= 2;
-            newGrid[i][k] = 0;
+            newGrid[row][currentCol - 1] *= 2;
+            newGrid[row][currentCol] = 0;
           }
         }
       }

@@ -1,6 +1,6 @@
 import Block from "./Block";
 
-const GameGrid = ({ gameGrid }) => {
+const Board = ({ gameGrid }) => {
   return (
 		<div className="gameGrid">
 			{gameGrid.map((row, rowIndex) => {
@@ -16,4 +16,4 @@ const GameGrid = ({ gameGrid }) => {
 	);
 }
 
-export default GameGrid;
+export default Board;

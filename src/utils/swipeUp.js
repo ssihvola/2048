@@ -6,18 +6,23 @@ const swipeUp = ({ setGameGrid }) => {
   setGameGrid((gameGrid) => {
     let newGrid = cloneDeep(gameGrid);
 
-    for (let j = 0; j < newGrid[0].length; j++) {
-      for (let i = 0; i < newGrid.length; i++) {
-        if (newGrid[i][j] !== 0) {
-          let k = i;
-          while (k - 1 >= 0 && newGrid[k - 1][j] === 0) {
-            newGrid[k - 1][j] = newGrid[k][j];
-            newGrid[k][j] = 0;
+    // Iterate through each column of the grid
+    for (let col = 0; col < newGrid[0].length; col++) {
+      // Iterate through each row from top to bottom in the current column
+      for (let row = 0; row < newGrid.length; row++) {
+        // If the current cell is not empty (contains a number)
+        if (newGrid[row][col] !== 0) {
+          let currentRow = i;
+          // Move the current number upwards as far as possible
+          while (currentRow - 1 >= 0 && newGrid[currentRow - 1][col] === 0) {
+            newGrid[currentRow - 1][col] = newGrid[currentRow][col];
+            newGrid[currentRow][col] = 0;
             k--;
           }
-          if (k - 1 >= 0 && newGrid[k - 1][j] === newGrid[k][j]) {
-            newGrid[k - 1][j] *= 2;
-            newGrid[k][j] = 0;
+          // If the next cell upwards has the same number, combine them
+          if (currentRow - 1 >= 0 && newGrid[currentRow - 1][col] === newGrid[currentRow][col]) {
+            newGrid[currentRow - 1][col] *= 2;
+            newGrid[currentRow][col] = 0;
           }
         }
       }
