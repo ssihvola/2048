@@ -1,6 +1,7 @@
 import { useEffect, useState } from 'react';
 import cloneDeep from 'lodash.clonedeep';
 import Board from './components/Board';
+import Header from './components/Header';
 import Points from './components/Points';
 
 import useSwipe from './utils/useSwipe';
@@ -34,6 +35,7 @@ const App = () => {
 
 	return (
 		<div>
+			<Header />
 			<Points />
 			<Board gameGrid={gameGrid} />
 		</div>

@@ -1,5 +1,6 @@
 import cloneDeep from "lodash.clonedeep";
 import addNumber from "./addNumber";
+import pointCalculation from "./pointCalculation";
 import isGameOver from "./isGameOver";
 
 const swipeUp = ({ setGameGrid }) => {
@@ -21,7 +22,8 @@ const swipeUp = ({ setGameGrid }) => {
           }
           // If the next cell upwards has the same number, combine them
           if (currentRow - 1 >= 0 && newGrid[currentRow - 1][col] === newGrid[currentRow][col]) {
-            newGrid[currentRow - 1][col] *= 2;
+            let number = newGrid[currentRow - 1][col] *= 2;
+            pointCalculation(number);
             newGrid[currentRow][col] = 0;
           }
         }
