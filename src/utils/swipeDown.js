@@ -1,37 +1,48 @@
-import cloneDeep from "lodash.clonedeep";
-import addNumber from "./addNumber";
-import isGameOver from "./isGameOver";
+import cloneDeep from 'lodash.clonedeep';
+import addNumber from './addNumber';
+import isGameOver from './isGameOver';
 
 const swipeDown = ({ setGameGrid }) => {
-  setGameGrid((gameGrid) => {
-    let newGrid = cloneDeep(gameGrid);
+	setGameGrid((gameGrid) => {
+		let newGrid = cloneDeep(gameGrid);
 
-    for (let j = 0; j < newGrid[0].length; j++) {
-      for (let i = newGrid.length - 1; i >= 0; i--) {
-        if (newGrid[i][j] !== 0) {
-          let k = i;
-          while (k + 1 < newGrid.length && newGrid[k + 1][j] === 0) {
-            newGrid[k + 1][j] = newGrid[k][j];
-            newGrid[k][j] = 0;
-            k++;
-          }
-          if (k + 1 < newGrid.length && newGrid[k + 1][j] === newGrid[k][j]) {
-            newGrid[k + 1][j] *= 2;
-            newGrid[k][j] = 0;
-          }
-        }
-      }
-    }
-    // Check if there was any movement in the grid
-    if (JSON.stringify(gameGrid) !== JSON.stringify(newGrid)) {
-      addNumber(newGrid);
-    }
-    if (isGameOver(newGrid)) {
-      alert('game over');
-    }
+		// Iterate through each column of the grid
+		for (let col = 0; col < newGrid[0].length; col++) {
+			// Iterate through each row from bottom to top in the current column
+			for (let row = newGrid.length - 1; row >= 0; row--) {
+				// If the current cell is not empty (contains a number)
+				if (newGrid[row][col] !== 0) {
+					let currentRow = row;
+					// Move the current number downwards as far as possible
+					while (
+						currentRow + 1 < newGrid.length &&
+						newGrid[currentRow + 1][col] === 0
+					) {
+						newGrid[currentRow + 1][col] = newGrid[currentRow][col];
+						newGrid[currentRow][col] = 0;
+						currentRow++;
+					}
+					// If the next cell downwards has the same number, combine them
+					if (
+						currentRow + 1 < newGrid.length &&
+						newGrid[currentRow + 1][col] === newGrid[currentRow][col]
+					) {
+						newGrid[currentRow + 1][col] *= 2;
+						newGrid[currentRow][col] = 0;
+					}
+				}
+			}
+		}
+		// Check if there was any movement in the grid
+		if (JSON.stringify(gameGrid) !== JSON.stringify(newGrid)) {
+			addNumber(newGrid);
+		}
+		if (isGameOver(newGrid)) {
+			alert('game over');
+		}
 
-    return newGrid;
-  });
+		return newGrid;
+	});
 };
 
 export default swipeDown;

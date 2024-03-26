@@ -1,6 +1,7 @@
 import { useEffect, useState } from 'react';
 import cloneDeep from 'lodash.clonedeep';
-import GameGrid from './components/GameGrid';
+import Board from './components/Board';
+import Points from './components/Points';
 
 import useSwipe from './utils/useSwipe';
 import addNumber from './utils/addNumber';
@@ -15,7 +16,9 @@ const App = () => {
 	]);
 
 	const initialize = () => {
+		// Deep clone the game grid to avoid mutating the original grid
 		let newGrid = cloneDeep(gameGrid);
+		// Initialize the board with two numbers
 		addNumber(newGrid);
 		addNumber(newGrid);
 		setGameGrid(newGrid);
@@ -30,7 +33,10 @@ const App = () => {
 	}, []);
 
 	return (
-		<GameGrid gameGrid={gameGrid} />
+		<div>
+			<Points />
+			<Board gameGrid={gameGrid} />
+		</div>
 	);
 };
 
