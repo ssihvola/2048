@@ -4,6 +4,11 @@ body {
   background-color:blanchedalmond;
 }
 
+h1 {
+  display: flex;
+  justify-content: center;
+}
+
 .gameGrid {
   padding-top: 10px;
   display: grid;
@@ -34,9 +39,7 @@ body {
 }
 
 .points {
-  padding: 10px;
-  border: 2px solid;
-  border-radius: 1.2vmin;
-  width: 100px;
-  background-color: azure;
+  display: flex;
+  justify-content: center;
+  padding-bottom: 10px;
 }
