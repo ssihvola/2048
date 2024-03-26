@@ -12,7 +12,7 @@ const swipeDown = ({ setGameGrid }) => {
 			for (let row = newGrid.length - 1; row >= 0; row--) {
 				// If the current cell is not empty (contains a number)
 				if (newGrid[row][col] !== 0) {
-					let currentRow = i;
+					let currentRow = row;
 					// Move the current number downwards as far as possible
 					while (
 						currentRow + 1 < newGrid.length &&

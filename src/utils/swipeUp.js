@@ -12,12 +12,12 @@ const swipeUp = ({ setGameGrid }) => {
       for (let row = 0; row < newGrid.length; row++) {
         // If the current cell is not empty (contains a number)
         if (newGrid[row][col] !== 0) {
-          let currentRow = i;
+          let currentRow = row;
           // Move the current number upwards as far as possible
           while (currentRow - 1 >= 0 && newGrid[currentRow - 1][col] === 0) {
             newGrid[currentRow - 1][col] = newGrid[currentRow][col];
             newGrid[currentRow][col] = 0;
-            k--;
+            currentRow--;
           }
           // If the next cell upwards has the same number, combine them
           if (currentRow - 1 >= 0 && newGrid[currentRow - 1][col] === newGrid[currentRow][col]) {
