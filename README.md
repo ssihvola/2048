@@ -9,7 +9,8 @@ This is my rendition of the game 2048, originally created by Gabrielle Cirulli i
 - Clean board after game over
 - Unit tests
 - Component tests
+- Backend: creating users, storing their data etc.
 
 # Bugs
 
-- Should calculate two numbers next to each other on one swipe, now calculates all the numbers on the row
+- Should calculate only two numbers next to each other on one swipe, now calculates all the numbers on the row/column
