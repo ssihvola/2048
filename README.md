@@ -9,6 +9,7 @@ This is my rendition of the game 2048, originally created by Gabrielle Cirulli i
 - Clean board after game over
 - Unit tests
 - Component tests
+- Cypress
 
 # Bugs
 
