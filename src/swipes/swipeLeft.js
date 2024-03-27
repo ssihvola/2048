@@ -1,7 +1,7 @@
 import cloneDeep from 'lodash.clonedeep';
-import addNumber from './addNumber';
-import pointCalculation from './pointCalculation';
-import isGameOver from './isGameOver';
+import addNumber from '../utils/addNumber';
+import pointCalculation from '../utils/pointCalculation';
+import isGameOver from '../utils/isGameOver';
 
 const swipeLeft = ({ setGameGrid }) => {
 	setGameGrid((gameGrid) => {

@@ -9,7 +9,6 @@ This is my rendition of the game 2048, originally created by Gabrielle Cirulli i
 - Clean board after game over
 - Unit tests
 - Component tests
-- Backend: creating users, storing their data etc.
 
 # Bugs
 
