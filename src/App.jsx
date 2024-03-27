@@ -2,10 +2,11 @@ import { useEffect, useState } from 'react';
 import cloneDeep from 'lodash.clonedeep';
 import Board from './components/Board';
 import Header from './components/Header';
-import Points from './components/Points';
+import GameOver from './components/GameOver';
 
 import useSwipe from './utils/useSwipe';
 import addNumber from './utils/addNumber';
+import isGameOver from './utils/isGameOver';
 import './index.css';
 
 const App = () => {
@@ -25,8 +26,7 @@ const App = () => {
 		setGameGrid(newGrid);
 	};
 
-
-	const { handleKeyDown } = useSwipe({ setGameGrid })
+	const { handleKeyDown } = useSwipe({ setGameGrid });
 
 	useEffect(() => {
 		initialize();
@@ -36,7 +36,6 @@ const App = () => {
 	return (
 		<div>
 			<Header />
-			<Points />
 			<Board gameGrid={gameGrid} />
 		</div>
 	);

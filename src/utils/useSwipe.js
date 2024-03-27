@@ -1,7 +1,7 @@
-import swipeDown from './swipeDown';
-import swipeLeft from './swipeLeft';
-import swipeRight from './swipeRight';
-import swipeUp from './swipeUp';
+import swipeDown from '../swipes/swipeDown';
+import swipeLeft from '../swipes/swipeLeft';
+import swipeRight from '../swipes/swipeRight';
+import swipeUp from '../swipes/swipeUp';
 
 const useSwipe = ({ setGameGrid }) => {
 	const handleKeyDown = (event) => {

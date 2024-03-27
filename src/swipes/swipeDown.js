@@ -1,7 +1,7 @@
 import cloneDeep from 'lodash.clonedeep';
-import addNumber from './addNumber';
-import pointCalculation from './pointCalculation';
-import isGameOver from './isGameOver';
+import addNumber from '../utils/addNumber';
+import pointCalculation from '../utils/pointCalculation';
+import isGameOver from '../utils/isGameOver';
 
 const swipeDown = ({ setGameGrid }) => {
 	setGameGrid((gameGrid) => {
@@ -28,8 +28,8 @@ const swipeDown = ({ setGameGrid }) => {
 						currentRow + 1 < newGrid.length &&
 						newGrid[currentRow + 1][col] === newGrid[currentRow][col]
 					) {
-						let number = newGrid[currentRow + 1][col] *= 2;
-            pointCalculation(number);
+						let number = (newGrid[currentRow + 1][col] *= 2);
+						pointCalculation(number);
 						newGrid[currentRow][col] = 0;
 					}
 				}
