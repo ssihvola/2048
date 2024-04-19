@@ -1,8 +1,6 @@
 import { useEffect, useState } from 'react';
-import cloneDeep from 'lodash.clonedeep';
 import Board from './components/Board';
 import Header from './components/Header';
-import GameOver from './components/GameOver';
 
 import useSwipe from './utils/useSwipe';
 import addNumber from './utils/addNumber';
@@ -22,8 +20,13 @@ const Game2048 = () => {
 	}, []); // Empty dependency array ensures this runs only once after the initial render
 
 	const initialize = () => {
-		// Deep clone the game grid to avoid mutating the original grid
-		let newGrid = cloneDeep(gameGrid);
+		let newGrid = [
+      [0, 0, 0, 0],
+      [0, 0, 0, 0],
+      [0, 0, 0, 0],
+      [0, 0, 0, 0],
+    ]
+		console.log(newGrid)
 		// Initialize the board with two numbers
 		addNumber(newGrid);
 		addNumber(newGrid);
@@ -40,6 +43,7 @@ const Game2048 = () => {
 		}
 		if (isGameOver(newGrid)) {
 			alert('game over');
+			newGrid = initialize();
 		}
 
 		setGameGrid(newGrid);
