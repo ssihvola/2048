@@ -17,6 +17,10 @@ const Game2048 = () => {
 		[0, 0, 0, 0],
 	]);
 
+	useEffect(() => {
+		initialize(); // Call initialize after the initial render
+	}, []); // Empty dependency array ensures this runs only once after the initial render
+
 	const initialize = () => {
 		// Deep clone the game grid to avoid mutating the original grid
 		let newGrid = cloneDeep(gameGrid);
@@ -26,12 +30,27 @@ const Game2048 = () => {
 		setGameGrid(newGrid);
 	};
 
-	const { handleKeyDown } = useSwipe({ setGameGrid });
+	const handleKeyDown = (event) => {
+		let swipe = event.code;
+		let newGrid = useSwipe(swipe, gameGrid);
+
+		// Check if there was any movement in the grid
+		if (JSON.stringify(gameGrid) !== JSON.stringify(newGrid)) {
+			addNumber(newGrid);
+		}
+		if (isGameOver(newGrid)) {
+			alert('game over');
+		}
+
+		setGameGrid(newGrid);
+	};
 
 	useEffect(() => {
-		initialize();
 		document.addEventListener('keydown', handleKeyDown);
-	}, []);
+		return () => {
+			document.removeEventListener('keydown', handleKeyDown);
+		};
+	}, [gameGrid]); // Add gameGrid as a dependency to ensure the effect runs when gameGrid changes
 
 	return (
 		<div>
