@@ -26,8 +26,6 @@ const swipeUp = (gameGrid) => {
       }
     }
 
-    console.log(newGrid)
-
   return newGrid;
   };
 };

@@ -1,12 +1,11 @@
 import { useEffect, useState } from 'react';
-import cloneDeep from 'lodash.clonedeep';
 import Board from './components/Board';
 import Header from './components/Header';
-import GameOver from './components/GameOver';
 
 import useSwipe from './utils/useSwipe';
 import addNumber from './utils/addNumber';
 import isGameOver from './utils/isGameOver';
+import pointCalculation from './utils/pointCalculation';
 import './index.css';
 
 const Game2048 = () => {
@@ -14,7 +13,7 @@ const Game2048 = () => {
 		[0, 0, 0, 0],
 		[0, 0, 0, 0],
 		[0, 0, 0, 0],
-		[0, 0, 0, 0],
+		[0, 0, 0, 0]
 	]);
 
 	useEffect(() => {
@@ -22,11 +21,18 @@ const Game2048 = () => {
 	}, []); // Empty dependency array ensures this runs only once after the initial render
 
 	const initialize = () => {
-		// Deep clone the game grid to avoid mutating the original grid
-		let newGrid = cloneDeep(gameGrid);
+		let newGrid = [
+			[0, 0, 0, 0],
+			[0, 0, 0, 0],
+			[0, 0, 0, 0],
+			[0, 0, 0, 0]
+    ];
+		let points = 0;
+		
 		// Initialize the board with two numbers
 		addNumber(newGrid);
 		addNumber(newGrid);
+		pointCalculation(points);
 		setGameGrid(newGrid);
 	};
 
@@ -39,7 +45,9 @@ const Game2048 = () => {
 			addNumber(newGrid);
 		}
 		if (isGameOver(newGrid)) {
-			alert('game over');
+			alert('Game over :( Want to have another go?');
+			initialize();
+			return
 		}
 
 		setGameGrid(newGrid);
