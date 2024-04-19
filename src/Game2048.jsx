@@ -5,6 +5,7 @@ import Header from './components/Header';
 import useSwipe from './utils/useSwipe';
 import addNumber from './utils/addNumber';
 import isGameOver from './utils/isGameOver';
+import pointCalculation from './utils/pointCalculation';
 import './index.css';
 
 const Game2048 = () => {
@@ -12,7 +13,7 @@ const Game2048 = () => {
 		[0, 0, 0, 0],
 		[0, 0, 0, 0],
 		[0, 0, 0, 0],
-		[0, 0, 0, 0],
+		[0, 0, 0, 0]
 	]);
 
 	useEffect(() => {
@@ -21,15 +22,17 @@ const Game2048 = () => {
 
 	const initialize = () => {
 		let newGrid = [
-      [0, 0, 0, 0],
-      [0, 0, 0, 0],
-      [0, 0, 0, 0],
-      [0, 0, 0, 0],
-    ]
-		console.log(newGrid)
+			[0, 0, 0, 0],
+			[0, 0, 0, 0],
+			[0, 0, 0, 0],
+			[0, 0, 0, 0]
+    ];
+		let points = 0;
+		
 		// Initialize the board with two numbers
 		addNumber(newGrid);
 		addNumber(newGrid);
+		pointCalculation(points);
 		setGameGrid(newGrid);
 	};
 
@@ -42,8 +45,9 @@ const Game2048 = () => {
 			addNumber(newGrid);
 		}
 		if (isGameOver(newGrid)) {
-			alert('game over');
-			newGrid = initialize();
+			alert('Game over :( Want to have another go?');
+			initialize();
+			return
 		}
 
 		setGameGrid(newGrid);

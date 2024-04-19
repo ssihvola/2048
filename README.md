@@ -6,7 +6,7 @@ This is my rendition of the game 2048, originally created by Gabrielle Cirulli i
 
 - Animations
 - Different colors for different numbers
-- Clean board after game over
+- Fix point system: 0 points after initialize & consider moving calculation system into Game2048 & useState for points? 
 - Unit tests
 - Component tests
 - Backend: creating users, logging in, top-10 scores?
