@@ -6,6 +6,7 @@ const swipeRight = (gameGrid) => {
 
 	// Iterate through each row of the grid
 	for (let row = 0; row < newGrid.length; row++) {
+		let notCombined = true;
 		// Iterate through each column from right to left in the current row
 		for (let col = newGrid[row].length - 1; col >= 0; col--) {
 			// If the current cell is not empty (contains a number)
@@ -20,10 +21,12 @@ const swipeRight = (gameGrid) => {
 				// If the next cell to the right has the same number, combine them
 				if (
 					currentCol + 1 < newGrid[row].length &&
-					newGrid[row][currentCol + 1] === newGrid[row][currentCol]
+					newGrid[row][currentCol + 1] === newGrid[row][currentCol] &&
+					notCombined
 				) {
 					let number = newGrid[row][currentCol + 1] *= 2;
 					pointCalculation(number);
+					notCombined = false;
 					newGrid[row][currentCol] = 0;
 				}
 			}
