@@ -4,6 +4,10 @@ This is my rendition of the game 2048, originally created by Gabrielle Cirulli i
 
 The chosen technologies were largely based on those I learned during the Full Stack Open course by The University of Helsinki: React + Vite for the app, Jest for unit tests, and Cypress for end-to-end tests.
 
+![2048-e2e-testcases](https://github.com/ssihvola/2048/assets/126657772/aa3e1a0d-0ac1-420c-adfc-1480d63671d1)
+
+![2048unit-tests](https://github.com/ssihvola/2048/assets/126657772/12978a21-2bfa-4ce5-88c3-e3483f3ef5a8)
+
 In addition, I also conducted a usability testing situation following Jacob Nielsen’s 10 heuristics. I recruited an external participant to conduct the following test cases:
 
 1. Navigate through the game interface and assess the intuitiveness of the controls.
